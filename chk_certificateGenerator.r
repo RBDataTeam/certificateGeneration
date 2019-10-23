@@ -85,6 +85,16 @@ output_directory = "G:/Reap Benefit/Data/certificate_generator/output"
       studenNum <- df1$SLNUM
       solveHubName <- df1$School_Name
       
+      # Civic Ladder
+      
+      studentLadder <- case_when(
+        studentSNI <= 50 ~ "interested",
+        studentSNI <= 150 ~ "engaged",
+        studentSNI > 150 ~ "active"
+      )
+      
+      
+      
       # Formatting the text which generates the Certificattion message
       # fptWhite is for normal text
       # fptBold is same as fptWhite but bold
@@ -259,7 +269,8 @@ output_directory = "G:/Reap Benefit/Data/certificate_generator/output"
                       width=2.5, height=0.47)%>%
           ph_add_fpar(certText, level = 1, id_chr = 2) %>%
           ph_add_par(level = 1, id_chr = 3) %>%
-          ph_add_text(paste0("You are a ", studentPersona),
+          ph_add_text(paste0("You are a ", studentPersona,". You are at ",
+                             studentLadder, " level."),
                       type = "body",
                       id_chr = 3,
                       style = fp_text(color = "black", 
